@@ -14,8 +14,7 @@ localhost:3000, which is where json-server is configured run.
 `json-server` is configured to have a delay of 1.2 seconds, so you can see what
 your application might actually look like, instead of serving instantaneous
 reponses. You can modify this behavior by changing (or removing) the number
-after the `-d` flag inside of the npm `dev` script.
-
+after the `-d` flag inside of the npm `dev` scrip
 ## Setup
 
 1. Fork this repository to your own github account or your github organization.

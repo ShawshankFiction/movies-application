@@ -2,15 +2,11 @@
  * es6 modules and imports
  */
 import $ from "jquery";
-
-import sayHello from './hello';
-sayHello('World');
+import getMovies from "./api.js";
 
 /**
  * require style imports
  */
-const {getMovies} = require('./api.js');
-
 
 getMovies().then((movies) => {
 
