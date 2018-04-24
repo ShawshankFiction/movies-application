@@ -5,9 +5,22 @@ module.exports = {
       .then(response => response.json());
   },
     deleteMovie: (id) => {
+    return fetch(`/api/movies/${id}`,
+        {
+            method: 'delete'
+        }).then(response => response.json());
 
   },
-  editMovie: (id) => {
+  editMovie: (movie) => {
+    return fetch(`/api/movies/${movie.id}`,
+        {
+          method: 'put',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(movie)
+
+        }).then(response => response.json());
 
   },
   addMovie: (movie) => {
