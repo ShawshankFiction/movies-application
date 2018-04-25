@@ -20,7 +20,6 @@ var Movies = [];
 
 // Populates movies list
 getMovies().then((dbMovie) => {
-    $('#save-edit').hide();
     $('#modalLabel').html('Add Movie');
 
 
@@ -49,6 +48,7 @@ getMovies().then((dbMovie) => {
     $('.del-btn').click(function() {
         // TODO: add are you sure about delete
        let confirmDel = confirm("Are you sure about this?");
+        console.log($(this).attr("value"));
         if(confirmDel) { deleteMovie($(this).attr("value")); }
     });
 
@@ -105,4 +105,40 @@ $('#submit-edit').click(function() {
 
 });
 
+$('#sorter').click(function(){
+    $('#movie-container').html(" ");
+
+    getMovies().then((dbMovie) => {
+
+
+        dbMovie.sort(function(a, b){
+            let titleA=a.title.toLowerCase(), titleB=b.title.toLowerCase();
+            if (titleA < titleB) //sort string ascending
+                return -1;
+            if (titleA > titleB)
+                return 1;
+            return 0 //default return value (no sorting)
+        });
+        console.log(dbMovie);
+
+        //Adds movies to list from DB
+        dbMovie.forEach(({title, rating, genre, id}) => {
+            $('#movie-container').append(
+                $('<div class="row">').append(
+                    $('<div class="movie-title col-3">').text(title),
+                    $('<div class="movie-rating col-3">').text(rating),
+                    $('<div class="movie-genre col-2">').text(genre),
+                    $('<div class="movie-edit col-2">').append(
+                        $(`<button value="${id}" class="edit-btn">`).text("Edit")),
+                    $('<div class="movie-delete col-2">').append(
+                        $(`<button value="${id}" class="del-btn">`).text("Delete"))
+                ));
+
+
+            Movies.push(id, {title: title, rating: rating, genre: genre});
+
+        });
+
+    });
+});
 
