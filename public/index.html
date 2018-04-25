@@ -5,20 +5,33 @@
     <title>My Application</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css" />
-    <style>
-        .delete-btn{
-            color: red;
-        }
-    </style>
+
 </head>
 <body>
 
     <div class="container">
-        <h1 id ="loading">Loading...</h1>
-        <div id= "movieContainer"></div>
+
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">
-            Launch demo modal
+            Add Movies
         </button>
+
+        <h1 id ="loading">Loading...</h1>
+        <div id= "movie-container">
+           <div class="row">
+
+               <div class="col-3">Title</div>
+               <div class="col-3">Rating</div>
+               <div class="col-2">Genre</div>
+               <div class="col-2">Edit</div>
+               <div class="col-2">Delete</div>
+
+           </div>
+
+
+        </div>
+
+
+
 
     </div>
 

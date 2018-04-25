@@ -4,6 +4,7 @@ module.exports = {
     return fetch('/api/movies')
       .then(response => response.json());
   },
+
     deleteMovie: (id) => {
     return fetch(`/api/movies/${id}`,
         {

@@ -3,8 +3,14 @@
     {
       "id": 1,
       "title": "Star Wars: A New Hope",
-      "rating": "10",
+      "rating": "3",
       "genre": "Science Fiction"
+    },
+    {
+      "title": "asdf",
+      "genre": "asdfasfasf",
+      "rating": "asdf",
+      "id": 2
     }
   ]
 }

@@ -8,3 +8,13 @@ html, body {
     transform: translateY(-100%);
     text-align: center;
 }
+
+ .delete-btn{
+     color: red;
+
+ }
+
+
+ #movie-container {
+     display:none;
+ }

@@ -9,49 +9,59 @@ import {getMovies, addMovie, deleteMovie, editMovie} from "./api.js";
  * require style imports
  */
 
-const movie = {id: 0, title: "", rating: 0, genre: ""};
+const movie = [0, [{ title: "", rating: 0, genre: ""}]];
+
+console.log(movie);
 
 let addedMovie = Object.create(movie);
 
-var moviesArray = [];
+
+var Movies = [];
+
+// Populates movies list
+getMovies().then((dbMovie) => {
 
 
-function editThisMovie(id, title, rating, genre){
-    movie.id = id;
-    movie.title = title;
-    movie.rating = rating;
-    movie.genre = genre;
-}
+  //Adds movies to list from DB
+    dbMovie.forEach( ({title, rating, genre, id})  => {
+     $('#movie-container').append(
+         $('<div class="row">').append(
 
-console.log(moviesArray);
+             $('<div class="movie-title col-3">').text(title),
+             $('<div class="movie-rating col-3">').text(rating),
+             $('<div class="movie-genre col-2">').text(genre),
+             $('<div class="movie-edit col-2">').append(
+                  $(`<button value="${id}" class="edit-btn">`).text("Edit")),
+             $('<div class="movie-delete col-2">').append(
+                 $(`<button value="${id}" class="del-btn">`).text("Delete"))
+         ));
 
 
+        Movies.push(id, { title: title, rating: rating, genre: genre} );
 
-getMovies().then((movies) => {
-  let i = 0;
-  $('#loading').css('display', 'none');
-  $('#movieContainer').append("<ul>");
-  movies.forEach(({title, rating, id}) => {
-    $('#movieContainer').append(`<li>id#${id} - ${title} - rating: ${rating}</li><button value = ${id} class = deleteBtn>Delete</button>
-    <button value = ${id} class = editBtn>Edit</button>`);
-    moviesArray.push(movies[i]);
-    i++;
   });
-  $('#movieContainer').append("</ul>");
 
-    $('.deleteBtn').click(function() {
-        console.log("hola");
+  Movies = dbMovie;
+    console.log(Movies);
 
-        deleteMovie($(this).attr("value"));
+    $('.del-btn').click(function() {
+        // TODO: add are you sure about delete
+       let confirmDel = confirm("Are you sure about this?");
+        if(confirmDel) { deleteMovie($(this).attr("value")); }
     });
-    $('.editBtn').click(function(){
+
+
+    //
+    $('.edit-btn').click(function(){
         $('#modal').modal('show');
-        $('#submit-edit').css('display', 'none');
-        console.log($(this).attr("value"));
-        let id = $(this).attr("value") - 1;
-        $('#title-edit').val(moviesArray[id].title);
-        $('#genre-edit').val(moviesArray[id].genre);
-        $('#rating-edit').val(moviesArray[id].rating);
+        $('#submit-edit').hide();
+
+        let id = $(this).attr("value")-1;
+
+        //Get data from Movies
+        $('#title-edit').val(Movies[id].title);
+        $('#genre-edit').val(Movies[id].genre);
+        $('#rating-edit').val(Movies[id].rating);
 
         $('#save-edit').show();
         $('#save-edit').click(function(){
@@ -59,9 +69,17 @@ getMovies().then((movies) => {
             console.log(movie);
             editMovie(movie);
             $('#save-edit').hide();
+            $('#modal').modal('hide');
 
         });
+
+
     });
+
+
+    // Hide loading text
+    $('#loading').hide();
+    $('#movie-container').show();
 
 }).catch((error) => {
   alert('Oh no! Something went wrong.\nCheck the console for details.');
@@ -72,10 +90,7 @@ $('#submit-edit').click(function() {
     addedMovie.title = $('#title-edit').val();
     addedMovie.genre = $('#genre-edit').val();
     addedMovie.rating = $('#rating-edit').val();
-    addedMovie.id = moviesArray.length + 1;
-    console.log(addedMovie);
-    moviesArray.push(addedMovie);
-    console.log(moviesArray);
+
     addMovie(addedMovie);
     $('#modal').modal('hide');
 
