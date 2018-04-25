@@ -1,7 +1,11 @@
 module.exports = {
-  getMovies: () => {
-    // TODO: add sort rating/title/genre
-    return fetch('/api/movies')
+  getMovies: (sort, query, order) => {
+      // set defaults
+      query = typeof query !== 'undefined' ? query : '';
+      sort = typeof sort !== 'undefined' ? sort : 'title';
+      order = typeof order !== 'undefined' ? order : 'asc';
+
+    return fetch(`/api/movies?q=${query}&_sort=${sort}&_order=${order}`)
       .then(response => response.json());
   },
 

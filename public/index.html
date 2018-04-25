@@ -10,28 +10,44 @@
 <body>
 
     <div class="container">
-        <div class = "row justify-content-end pr-3">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">
+        <div class = "row justify-content-end pr-3 m-1">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal" id="add-movie">
             Add Movies
         </button>
-            <button type="button" class="btn btn-primary ml-1" id = "sorter">Sort Movies</button>
+            <button type="button" class="sort-btn btn btn-secondary ml-1" data-value="title">Sort Title</button>
+            <button type="button" class="sort-btn btn btn-secondary ml-1" data-value="genre">Sort Genre</button>
+            <button type="button" class="sort-btn btn btn-secondary ml-1" data-value="rating">Sort Rating</button>
         </div>
 
-        <h1 id ="loading">Loading...</h1>
-        <div id= "movie-container">
-           <div class="row">
+        <h1 id ="loading"><div class="loader"></div></h1>
 
-               <div class="col-3">Title</div>
-               <div class="col-3">Rating</div>
-               <div class="col-2">Genre</div>
-               <div class="col-2">Edit</div>
-               <div class="col-2">Delete</div>
 
-           </div>
 
+
+        <div id="movie-full">
+
+            <table class="table table-hover">
+                <thead id="movie-header" class="thead-light">
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody id="movie-container">
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+
+                </tbody>
+            </table>
 
         </div>
-
 
 
 
@@ -48,18 +64,31 @@
                 </div>
                 <div class="modal-body">
 
-                    <label for="title-edit">Title</label>
-                    <input type="text" name="title-edit" id="title-edit" />
-                    <label for="title-edit">Rating</label>
-                    <input type="text" name="rating-edit" id="rating-edit" />
-                    <label for="title-edit">Genre</label>
-                    <input type="text" name="genre-edit" id="genre-edit" />
 
-                    <button type="submit" name="submit-edit" id="submit-edit">Submit</button>
+                        <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="title-movie">Title</span>
+                        </div>
+                        <input type="text" class="form-control" name="title-edit" id="title-edit" aria-describedby="basic-addon3">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="rating-movie">Rating</span>
+                        </div>
+                        <input type="text" class="form-control" name="rating-edit" id="rating-edit"  aria-describedby="basic-addon3">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="genre-title">Genre</span>
+                        </div>
+                        <input type="text" class="form-control"  name="genre-edit" id="genre-edit"  aria-describedby="basic-addon3">
+                    </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id = "save-edit">Save changes</button>
+                    <button type="button" class="edit-button btn btn-primary" id = "save-add">Save changes</button>
                 </div>
             </div>
         </div>

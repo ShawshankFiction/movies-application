@@ -4,141 +4,119 @@
 //import $ from "jquery";
 import {getMovies, addMovie, deleteMovie, editMovie} from "./api.js";
 
+let movie = {title: "", genre: "", rating: 0, id: 0};
 
-/**
- * require style imports
- */
-
-let movie = [0, [{ title: "", rating: 0, genre: ""}]];
-
-console.log(movie);
-
-let addedMovie = Object.create(movie);
-
-
-var Movies = [];
+let Movies = [];
 
 // Populates movies list
-getMovies().then((dbMovie) => {
-    $('#modalLabel').html('Add Movie');
+function refreshMovies(sort) {
+    sort = typeof sort !== 'undefined' ? sort : 'id';
 
+    $('#loading').show();
+    $('#movie-full').hide();
 
-  //Adds movies to list from DB
-    dbMovie.forEach( ({title, rating, genre, id})  => {
-     $('#movie-container').append(
-         $('<div class="row">').append(
+    $('#movie-container').empty();
 
-             $('<div class="movie-title col-3">').text(title),
-             $('<div class="movie-rating col-3">').text(rating),
-             $('<div class="movie-genre col-2">').text(genre),
-             $('<div class="movie-edit col-2">').append(
-                  $(`<button value="${id}" class="edit-btn">`).text("Edit")),
-             $('<div class="movie-delete col-2">').append(
-                 $(`<button value="${id}" class="del-btn">`).text("Delete"))
-         ));
-
-
-        Movies.push(id, { title: title, rating: rating, genre: genre} );
-
-  });
-
-  Movies = dbMovie;
-    console.log(Movies);
-
-    $('.del-btn').click(function() {
-        // TODO: add are you sure about delete
-       let confirmDel = confirm("Are you sure about this?");
-        console.log($(this).attr("value"));
-        if(confirmDel) { deleteMovie($(this).attr("value")); }
-    });
-
-
-    //
-    $('.edit-btn').click(function(){
-        $('#modal').modal('show');
-        $('#modalLabel').html('Edit Movie');
-        $('#submit-edit').hide();
-
-        let id = $(this).attr("value")-1;
-
-        //Get data from Movies
-        $('#title-edit').val(Movies[id].title);
-        $('#genre-edit').val(Movies[id].genre);
-        $('#rating-edit').val(Movies[id].rating);
-
-        $('#save-edit').show();
-        $('#save-edit').click(function(){
-            movie.id = (id + 1);
-            movie.title = $('#title-edit').val();
-            movie.rating = $('#rating-edit').val();
-            movie.genre = $('#genre-edit').val();
-            console.log(movie);
-            editMovie(movie);
-            $('#save-edit').hide();
-            $('#modalLabel').html('Add Movie');
-            $('#modal').modal('hide');
-
-        });
-
-
-    });
-
-
-    // Hide loading text
-    $('#loading').hide();
-    $('#movie-container').show();
-
-}).catch((error) => {
-  alert('Oh no! Something went wrong.\nCheck the console for details.');
-  console.log(error);
-});
-
-$('#submit-edit').click(function() {
-
-
-    addedMovie.title = $('#title-edit').val();
-    addedMovie.genre = $('#genre-edit').val();
-    addedMovie.rating = $('#rating-edit').val();
-
-    addMovie(addedMovie);
-    $('#modal').modal('hide');
-
-});
-
-$('#sorter').click(function(){
-    $('#movie-container').html(" ");
-
-    getMovies().then((dbMovie) => {
-
-
-        dbMovie.sort(function(a, b){
-            let titleA=a.title.toLowerCase(), titleB=b.title.toLowerCase();
-            if (titleA < titleB) //sort string ascending
-                return -1;
-            if (titleA > titleB)
-                return 1;
-            return 0 //default return value (no sorting)
-        });
-        console.log(dbMovie);
+    getMovies(sort).then((dbMovie) => {
 
         //Adds movies to list from DB
         dbMovie.forEach(({title, rating, genre, id}) => {
             $('#movie-container').append(
-                $('<div class="row">').append(
-                    $('<div class="movie-title col-3">').text(title),
-                    $('<div class="movie-rating col-3">').text(rating),
-                    $('<div class="movie-genre col-2">').text(genre),
-                    $('<div class="movie-edit col-2">').append(
-                        $(`<button value="${id}" class="edit-btn">`).text("Edit")),
-                    $('<div class="movie-delete col-2">').append(
-                        $(`<button value="${id}" class="del-btn">`).text("Delete"))
+                $('<tr>').append(
+                    $(`<th scope="row" class="movie-title">`).text(title),
+                    $(`<td class="movie-rating-${id}">`).text(rating),
+                    $(`<td class="movie-genre-${id} ">`).text(genre),
+                    $(`<td class="movie-edit">`).append(
+                        $(`<button value="${id}" class="btn btn-outline-primary edit-btn">`).text("Edit")),
+                    $('<td class="movie-delete ">').append(
+                        $(`<button value="${id}" class="btn btn-outline-danger del-btn">`).text("Delete"))
                 ));
-
 
             Movies.push(id, {title: title, rating: rating, genre: genre});
 
         });
 
+        Movies = dbMovie;
+
+        // Initilize the event handlers
+        initEvents();
+
+        // Hide loading text
+        $('#loading').hide();
+        $('#movie-full').show();
+
+    }).catch((error) => {
+        alert('Oh no! Something went wrong.\nCheck the console for details.');
+        console.log(error);
     });
+
+}
+
+// Event listener for add movie click
+$('#add-movie').click(function()  {
+    $('#modal input').val("");
+    $('.edit-button').attr("id","save-add");
+    $('#modalLabel').html('Add Movie');
 });
 
+
+// Event listener for adding
+$('#save-add').click(function() {
+   let title = $('#title-edit').val();
+   let genre = $('#genre-edit').val();
+   let rating = $('#rating-edit').val();
+
+    addMovie({title, genre, rating}).then(refreshMovies);
+
+    $('#modal').modal('hide');
+});
+
+
+// Event handlers
+function initEvents() {
+
+    // Delete button creation
+    $('.del-btn').click(function () {
+        let confirmDel = confirm("Are you sure about this?");
+        if (confirmDel) { deleteMovie($(this).attr("value")); }
+        refreshMovies();
+    });
+
+    // Edit movie
+    $('.edit-btn').click(function () {
+
+        $('#modal').modal('show');
+
+        $('#modalLabel').text('Edit Movie');
+        $('.edit-button').attr("id","save-edit");
+
+        let id = $(this).attr("value");
+
+        //Get data from Movies
+        $('#title-edit').val($(`.movie-title-${id}`).text());
+        $('#genre-edit').val($(`.movie-genre-${id}`).text());
+        $('#rating-edit').val($(`.movie-rating-${id}`).text());
+
+        $('#save-edit').click(function () {
+
+            movie.id = (id);
+            movie.title = $('#title-edit').val();
+            movie.rating = $('#rating-edit').val();
+            movie.genre = $('#genre-edit').val();;
+
+            editMovie().then(refreshMovies);
+
+            $('#modal').modal('hide');
+        });
+
+    });
+
+}
+
+
+$('.sort-btn').click(function () {
+    refreshMovies($(this).data('value'));
+});
+
+// First movie refresh
+refreshMovies();
