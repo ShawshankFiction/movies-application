@@ -9,7 +9,7 @@ import {getMovies, addMovie, deleteMovie, editMovie} from "./api.js";
  * require style imports
  */
 
-const movie = [0, [{ title: "", rating: 0, genre: ""}]];
+let movie = [0, [{ title: "", rating: 0, genre: ""}]];
 
 console.log(movie);
 
@@ -20,6 +20,8 @@ var Movies = [];
 
 // Populates movies list
 getMovies().then((dbMovie) => {
+    $('#save-edit').hide();
+    $('#modalLabel').html('Add Movie');
 
 
   //Adds movies to list from DB
@@ -54,6 +56,7 @@ getMovies().then((dbMovie) => {
     //
     $('.edit-btn').click(function(){
         $('#modal').modal('show');
+        $('#modalLabel').html('Edit Movie');
         $('#submit-edit').hide();
 
         let id = $(this).attr("value")-1;
@@ -65,10 +68,14 @@ getMovies().then((dbMovie) => {
 
         $('#save-edit').show();
         $('#save-edit').click(function(){
-            editThisMovie((id + 1), $('#title-edit').val(), $('#rating-edit').val(), $('#genre-edit').val());
+            movie.id = (id + 1);
+            movie.title = $('#title-edit').val();
+            movie.rating = $('#rating-edit').val();
+            movie.genre = $('#genre-edit').val();
             console.log(movie);
             editMovie(movie);
             $('#save-edit').hide();
+            $('#modalLabel').html('Add Movie');
             $('#modal').modal('hide');
 
         });
@@ -87,6 +94,8 @@ getMovies().then((dbMovie) => {
 });
 
 $('#submit-edit').click(function() {
+
+
     addedMovie.title = $('#title-edit').val();
     addedMovie.genre = $('#genre-edit').val();
     addedMovie.rating = $('#rating-edit').val();
