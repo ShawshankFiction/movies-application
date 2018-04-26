@@ -23,7 +23,7 @@ function refreshMovies(sort) {
         dbMovie.forEach(({title, rating, genre, id}) => {
             $('#movie-container').append(
                 $('<tr>').append(
-                    $(`<th scope="row" class="movie-title">`).text(title),
+                    $(`<th scope="row" class="movie-title-${id}">`).text(title),
                     $(`<td class="movie-rating-${id}">`).text(rating),
                     $(`<td class="movie-genre-${id} ">`).text(genre),
                     $(`<td class="movie-edit">`).append(

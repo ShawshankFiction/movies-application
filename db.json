@@ -53,6 +53,18 @@
       "genre": "asdfasdf",
       "rating": "asdf",
       "id": 14
+    },
+    {
+      "title": "",
+      "genre": "234234",
+      "rating": "1",
+      "id": 15
+    },
+    {
+      "title": "fixed it",
+      "genre": "face",
+      "rating": "face",
+      "id": 16
     }
   ]
 }
