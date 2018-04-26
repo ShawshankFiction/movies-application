@@ -1,82 +1,358 @@
 {
   "movies": [
     {
-      "title": "asdfasdfasdf",
-      "genre": "face",
-      "rating": "face",
+      "title": "Last of the Mohicans",
+      "genre": "Historical Fiction",
+      "rating": "9",
+      "id": 1
+    },
+    {
+      "title": "Pulp Fiction",
+      "genre": "Thriller",
+      "rating": "10",
+      "id": 2
+    },
+    {
+      "title": "Fear and Loathing in Las Vegas",
+      "genre": "Drama",
+      "rating": "10",
+      "id": 3
+    },
+    {
+      "title": "Monty Python and the Holy Grail",
+      "genre": "Comedy",
+      "rating": "10 Coconuts",
+      "id": 4
+    },
+    {
+      "title": "Alien",
+      "genre": "Science Fiction",
+      "rating": "9",
+      "id": 5
+    },
+    {
+      "title": "Aliens",
+      "genre": "Science Fiction/Action",
+      "rating": "10",
       "id": 6
     },
     {
-      "title": "asdf",
-      "genre": "asdf",
-      "rating": "asdf",
+      "title": "Braveheart",
+      "genre": "Historical Fiction",
+      "rating": "6",
       "id": 7
     },
     {
-      "title": "mbnv,mb",
-      "genre": "234234",
-      "rating": "234234",
+      "title": "The Patriot",
+      "genre": "Historical Fiction",
+      "rating": "7",
       "id": 8
     },
     {
-      "title": "m,nbkjhbm,nmbnv,mb",
-      "genre": "234234",
-      "rating": "234234",
+      "title": "Signs",
+      "genre": "Thriller",
+      "rating": "7",
       "id": 9
     },
     {
-      "title": "asdf",
-      "genre": "234234",
-      "rating": "234234",
+      "title": "Star Wars: A New Hope",
+      "genre": "Space Fantasy",
+      "rating": "8",
       "id": 10
     },
     {
-      "title": "asdf",
-      "genre": "asdf",
-      "rating": "asdf",
+      "title": "Star Wars: The Empire Strikes Back",
+      "genre": "Space Fantasy",
+      "rating": "10",
       "id": 11
     },
     {
-      "title": "asdfasdfasdf",
-      "genre": "10",
-      "rating": "1",
+      "title": "Star Wars: Return of the Jedi",
+      "genre": "Space Fantasy",
+      "rating": "8",
       "id": 12
     },
     {
-      "title": "asdf",
-      "genre": "asdfasdf",
-      "rating": "asdf",
+      "title": "Star Wars: The Phantom Menace",
+      "genre": "Space Fantasy",
+      "rating": "3",
       "id": 13
     },
     {
-      "title": "asdf",
-      "genre": "asdfasdf",
-      "rating": "asdf",
+      "title": "Star Wars: Attack of the Clones",
+      "genre": "Space Fantasy",
+      "rating": "5",
       "id": 14
     },
     {
-      "title": "fixed it",
-      "genre": "face",
-      "rating": "face",
+      "title": "Star Wars: Revenge of the Sith",
+      "genre": "Space Fantasy",
+      "rating": "6",
+      "id": 15
+    },
+    {
+      "title": "Rogue One: A Star Wars Story",
+      "genre": "Space Fantasy",
+      "rating": "9 ",
       "id": 16
     },
     {
-      "title": "face",
-      "genre": "face",
-      "rating": "face",
+      "title": "Star Wars: The Force Awakens",
+      "genre": "Space Fantasy",
+      "rating": "7",
       "id": 17
     },
     {
-      "title": "test",
-      "genre": "test",
-      "rating": "test",
+      "title": "Star Wars: The Last Jedi",
+      "genre": "Space Fantasy",
+      "rating": "7",
       "id": 18
     },
     {
-      "title": "movienamedane",
-      "genre": "asdf",
-      "rating": "te",
+      "title": "Mulan",
+      "genre": "Drama",
+      "rating": "10",
       "id": 19
+    },
+    {
+      "title": "The Conjuring ",
+      "genre": "Horror",
+      "rating": "8",
+      "id": 20
+    },
+    {
+      "title": "Annabelle",
+      "genre": "Horror",
+      "rating": "6",
+      "id": 21
+    },
+    {
+      "title": "Dog Soldiers",
+      "genre": "Horror",
+      "rating": "7",
+      "id": 22
+    },
+    {
+      "title": "The Waterboy",
+      "genre": "Comedy",
+      "rating": "5",
+      "id": 23
+    },
+    {
+      "title": "Blackhawk Down",
+      "genre": "Military Drama",
+      "rating": "9",
+      "id": 24
+    },
+    {
+      "title": "A Bridge Too Far",
+      "genre": "Military Drama",
+      "rating": "9",
+      "id": 25
+    },
+    {
+      "title": "Full Metal Jacket",
+      "genre": "Military Drama",
+      "rating": "8",
+      "id": 26
+    },
+    {
+      "title": "Starship Troopers",
+      "genre": "Science Fiction/Action",
+      "rating": "4",
+      "id": 27
+    },
+    {
+      "title": "Platoon",
+      "genre": "Military Drama",
+      "rating": "8",
+      "id": 28
+    },
+    {
+      "title": "Apocalypse Now",
+      "genre": "Military Drama",
+      "rating": "10",
+      "id": 29
+    },
+    {
+      "title": "Patton",
+      "genre": "Military Drama",
+      "rating": "9",
+      "id": 30
+    },
+    {
+      "title": "Lawrence of Arabia",
+      "genre": "Military Drama",
+      "rating": "9",
+      "id": 31
+    },
+    {
+      "title": "The Fellowship of the Ring",
+      "genre": "Fantasy",
+      "rating": "9",
+      "id": 32
+    },
+    {
+      "title": "The Two Towers",
+      "genre": "Fantasy",
+      "rating": "8",
+      "id": 33
+    },
+    {
+      "title": "The Return of the King",
+      "genre": "Fantasy",
+      "rating": "7",
+      "id": 34
+    },
+    {
+      "title": "Conan the Barbarian (1982)",
+      "genre": "Fantasy",
+      "rating": "8",
+      "id": 35
+    },
+    {
+      "title": "Conan the Barbarian (2011)",
+      "genre": "Fantasy",
+      "rating": "3",
+      "id": 36
+    },
+    {
+      "title": "Conan the Destroyer",
+      "genre": "Fantasy",
+      "rating": "6",
+      "id": 37
+    },
+    {
+      "title": "The Matrix",
+      "genre": "Science Fiction/Action",
+      "rating": "10",
+      "id": 38
+    },
+    {
+      "title": "The Matrix: Reloaded",
+      "genre": "Science Fiction/Action",
+      "rating": "7",
+      "id": 39
+    },
+    {
+      "title": "Training Day",
+      "genre": "Drama",
+      "rating": "8",
+      "id": 40
+    },
+    {
+      "title": "The Godfather",
+      "genre": "Drama",
+      "rating": "9",
+      "id": 41
+    },
+    {
+      "title": "The Predator",
+      "genre": "Action",
+      "rating": "10",
+      "id": 42
+    },
+    {
+      "title": "Captain America: The First Avenger",
+      "genre": "Action",
+      "rating": "6",
+      "id": 43
+    },
+    {
+      "title": "Captain America: The Winter Soldier",
+      "genre": "Action",
+      "rating": "9",
+      "id": 44
+    },
+    {
+      "title": "Captain America: Civil War",
+      "genre": "Action",
+      "rating": "8",
+      "id": 45
+    },
+    {
+      "title": "The Avengers",
+      "genre": "Action",
+      "rating": "8",
+      "id": 46
+    },
+    {
+      "title": "Avengers: Age of Ultron",
+      "genre": "Action",
+      "rating": "7",
+      "id": 47
+    },
+    {
+      "title": "Thor: Ragnarok",
+      "genre": "Action",
+      "rating": "8",
+      "id": 48
+    },
+    {
+      "title": "The Dark Knight",
+      "genre": "Action",
+      "rating": "9",
+      "id": 49
+    },
+    {
+      "title": "Unbreakable",
+      "genre": "Thriller",
+      "rating": "10",
+      "id": 50
+    },
+    {
+      "title": "Split",
+      "genre": "Thriller",
+      "rating": "8",
+      "id": 51
+    },
+    {
+      "title": "A Scanner Darkly",
+      "genre": "Drama",
+      "rating": "8",
+      "id": 52
+    },
+    {
+      "title": "A Fish Called Wanda",
+      "genre": "Comedy",
+      "rating": "8",
+      "id": 53
+    },
+    {
+      "title": "The Shawshank Redemption",
+      "genre": "Drama",
+      "rating": "10",
+      "id": 54
+    },
+    {
+      "title": "Forrest Gump",
+      "genre": "Comedy/Drama",
+      "rating": "9",
+      "id": 55
+    },
+    {
+      "title": "Pineapple Express",
+      "genre": "Comedy",
+      "rating": "8",
+      "id": 56
+    },
+    {
+      "title": "This is the End",
+      "genre": "Comedy",
+      "rating": "7",
+      "id": 57
+    },
+    {
+      "title": "Get Out",
+      "genre": "Horror",
+      "rating": "9",
+      "id": 58
+    },
+    {
+      "title": "Moneyball",
+      "genre": "Drama",
+      "rating": "8",
+      "id": 59
     }
   ]
 }
