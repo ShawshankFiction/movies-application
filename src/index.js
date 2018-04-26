@@ -1,26 +1,26 @@
 /**
  * es6 modules and imports
  */
-//import $ from "jquery";
 import {getMovies, addMovie, deleteMovie, editMovie} from "./api.js";
-
-let movie = {title: "", genre: "", rating: 0, id: 0};
-
-let Movies = [];
 
 // Populates movies list
 function refreshMovies(sort) {
     sort = typeof sort !== 'undefined' ? sort : 'id';
+
+    // Unbinds all event handlers
+    $("body").find("*").each(function() {
+        $(this).off("click");
+    });
 
     $('#loading').show();
     $('#movie-full').hide();
 
     $('#movie-container').empty();
 
-    getMovies(sort).then((dbMovie) => {
+    getMovies(sort).then((dbMovies) => {
 
         //Adds movies to list from DB
-        dbMovie.forEach(({title, rating, genre, id}) => {
+        dbMovies.forEach(({title, rating, genre, id}) => {
             $('#movie-container').append(
                 $('<tr>').append(
                     $(`<th scope="row" class="movie-title-${id}">`).text(title),
@@ -32,11 +32,7 @@ function refreshMovies(sort) {
                         $(`<button value="${id}" class="btn btn-outline-danger del-btn">`).text("Delete"))
                 ));
 
-            Movies.push(id, {title: title, rating: rating, genre: genre});
-
         });
-
-        Movies = dbMovie;
 
         // Initilize the event handlers
         initEvents();
@@ -52,30 +48,11 @@ function refreshMovies(sort) {
 
 }
 
-// Event listener for add movie click
-$('#add-movie').click(function()  {
-    $('#modal input').val("");
-    $('.edit-button').attr("id","save-add");
-    $('#modalLabel').html('Add Movie');
-});
 
-
-// Event listener for adding
-$('#save-add').click(function() {
-   let title = $('#title-edit').val();
-   let genre = $('#genre-edit').val();
-   let rating = $('#rating-edit').val();
-
-    addMovie({title, genre, rating}).then(refreshMovies);
-
-    $('#modal').modal('hide');
-});
-
-
-// Event handlers
+// Create event handlers, after object creation in the DOM
 function initEvents() {
 
-    // Delete button creation
+    // Delete button
     $('.del-btn').click(function () {
         let confirmDel = confirm("Are you sure about this?");
         if (confirmDel) { deleteMovie($(this).attr("value")); }
@@ -84,39 +61,71 @@ function initEvents() {
 
     // Edit movie
     $('.edit-btn').click(function () {
+        editor('edit', $(this).attr("value"));
+    });
 
-        $('#modal').modal('show');
+    // Event listener for add movie click
+    $('#add-movie').click(function()  {
+        editor();
+    });
 
-        $('#modalLabel').text('Edit Movie');
-        $('.edit-button').attr("id","save-edit");
+    // Sort based on value of button
+    $('.sort-btn').click(function () {
+        refreshMovies($(this).data('value'));
+    });
 
-        let id = $(this).attr("value");
+    // Save Edit/Add
+    $('#save-edit-btn').click(function () {
 
-        //Get data from Movies
-        $('#title-edit').val($(`.movie-title-${id}`).text());
-        $('#genre-edit').val($(`.movie-genre-${id}`).text());
-        $('#rating-edit').val($(`.movie-rating-${id}`).text());
+        let id = $('#id-edit').val();
+        let title = $('#title-edit').val();
+        let rating = $('#rating-edit').val();
+        let genre = $('#genre-edit').val();
 
-        $('#save-edit').click(function () {
+        if ($(this).data('action') === 'edit') {
+            editMovie({title: title, genre: genre, rating: rating, id: id}).then(refreshMovies);
+        }
 
-            movie.id = (id);
-            movie.title = $('#title-edit').val();
-            movie.rating = $('#rating-edit').val();
-            movie.genre = $('#genre-edit').val();;
+        if ($(this).data('action') === 'add') {
+            addMovie({title, genre, rating}).then(refreshMovies);
+        }
 
-            editMovie().then(refreshMovies);
-
-            $('#modal').modal('hide');
-        });
+        $('#modal').modal('hide');
 
     });
 
 }
 
+// Initialize editor
+function editor(type, id) {
+    type = typeof type !== 'undefined' ? type : 'add';
+    id = typeof id !== 'undefined' ? id : 0;
 
-$('.sort-btn').click(function () {
-    refreshMovies($(this).data('value'));
-});
+    // clear all inputs
+    $('#modal input').val("");
+
+    $('#modal').modal('show');
+
+    if (type === "edit") {
+
+        $('#modalLabel').text('Edit Movie');
+        $('#save-edit-btn').attr("data-action","edit");
+
+        //Get data from Movies
+        $('#title-edit').val($(`.movie-title-${id}`).text());
+        $('#genre-edit').val($(`.movie-genre-${id}`).text());
+        $('#rating-edit').val($(`.movie-rating-${id}`).text());
+        $('#id-edit').val(id);
+
+    } else {
+
+        $('#modalLabel').html('Add Movie');
+        $('#save-edit-btn').attr("data-action","add");
+
+    }
+
+}
+
 
 // First movie refresh
 refreshMovies();

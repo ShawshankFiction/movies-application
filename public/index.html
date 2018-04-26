@@ -22,8 +22,6 @@
         <h1 id ="loading"><div class="loader"></div></h1>
 
 
-
-
         <div id="movie-full">
 
             <table class="table table-hover">
@@ -37,12 +35,6 @@
                 </tr>
                 </thead>
                 <tbody id="movie-container">
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
 
                 </tbody>
             </table>
@@ -85,10 +77,10 @@
                         </div>
                         <input type="text" class="form-control"  name="genre-edit" id="genre-edit"  aria-describedby="basic-addon3">
                     </div>
-
+                            <input type="hidden" name="id-edit" id="id-edit" value=""/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="edit-button btn btn-primary" id = "save-add">Save changes</button>
+                    <button type="button" class="edit-button btn btn-primary" id = "save-edit-btn" data-action="add">Save changes</button>
                 </div>
             </div>
         </div>
